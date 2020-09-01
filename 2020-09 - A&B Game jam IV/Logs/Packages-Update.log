@@ -46,3 +46,11 @@ The following packages were added:
 The following packages were updated:
   com.unity.2d.animation from version 3.2.2 to 3.2.3
   com.unity.2d.spriteshape from version 3.0.11 to 3.0.12
+
+=== Tue Sep  1 19:27:31 2020
+
+Packages were changed.
+Update Mode: mergeDefaultDependencies
+
+The following packages were updated:
+  com.unity.cinemachine from version 2.3.4 to 2.5.0
