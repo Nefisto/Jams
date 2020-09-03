@@ -4,10 +4,12 @@ using System.Reflection;
 public partial class Enemy : MonoBehaviour
 {
     public EnemyStatus blueprintStatus;
+    public GameEventInt loseLifeEvent;
 
     [Header("Debug")]
     public Waypoints pathToFollow = null;    
-    public EnemyStatus status;
+
+    private EnemyStatus status;
 
     private void Start()
     {
@@ -15,11 +17,19 @@ public partial class Enemy : MonoBehaviour
             Debug.LogError("This enemy does not have a blueprint status", this);
 
         status = ScriptableObject.CreateInstance<EnemyStatus>();
-        ResetStatus();
+        ReflectionStatus();
+
+        InitStatus();
+    }
+
+    private void InitStatus()
+    {
+        status.life = blueprintStatus.initialLife.GetRandom();
+        status.speed = blueprintStatus.initialSpeed.GetRandom();
     }
 
     //* PROUD 
-    private void ResetStatus()
+    private void ReflectionStatus()
     {
         var myType = typeof(EnemyStatus);
 

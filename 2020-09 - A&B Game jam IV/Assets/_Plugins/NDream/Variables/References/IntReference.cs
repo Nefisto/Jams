@@ -9,6 +9,8 @@ namespace NDream
         public int ConstantValue;
         public IntVariable Variable;
 
+        public event Action onValueChanged = null;
+
         public IntReference()
         { }
 
@@ -23,6 +25,9 @@ namespace NDream
             get => UseConstant ? ConstantValue : Variable.Value;
             set
             {
+                if (onValueChanged != null)
+                    onValueChanged.Invoke();
+
                 if (UseConstant)
                     ConstantValue = value;
                 else

@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce2dd916ddb4b044bb9d6a7ea7a2db2, type: 3}
   m_Name: Rato radioativo
   m_EditorClassIdentifier: 
-  life:
+  initialLife:
     min: 0
     max: 0
-    currentMin: 8
-    currentMax: 12
-  speed:
+    currentMin: 0
+    currentMax: 0
+  initialSpeed:
     min: 0
     max: 0
-    currentMin: 2.02292
-    currentMax: 5.2017937
+    currentMin: 0
+    currentMax: 0
   damage: 1
+  life: 0
+  speed: 0

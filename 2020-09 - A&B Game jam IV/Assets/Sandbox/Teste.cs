@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NDream;
 
 public class Teste : MonoBehaviour
 {
@@ -8,13 +9,5 @@ public class Teste : MonoBehaviour
 
     public GameObject enemy;
 
-    public List<bool> coroutineLockers;
-
-    private bool VerifyLock()
-        => coroutineLockers.Exists(x => x == true);
-
-    public void Spawn()
-    {
-        Debug.Log(VerifyLock());
-    }
+    public IntReference var;
 }

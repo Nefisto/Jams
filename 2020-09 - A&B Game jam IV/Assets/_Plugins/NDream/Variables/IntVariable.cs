@@ -7,5 +7,8 @@ namespace NDream
     {
         public void ApplyChange(int value)
             => Value += value;
+
+        public void SubtractValue(int value)
+            => Value += value;
     }
 }

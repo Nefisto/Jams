@@ -26,6 +26,8 @@ public partial class Enemy
                     yield return null;
                 }
             }
+
+            Die(true);
         }
     }
 }

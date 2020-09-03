@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce2dd916ddb4b044bb9d6a7ea7a2db2, type: 3}
   m_Name: Normal rat
   m_EditorClassIdentifier: 
-  life:
+  initialLife:
     min: 0
     max: 0
-    currentMin: 4
-    currentMax: 7
-  speed:
+    currentMin: 0
+    currentMax: 0
+  initialSpeed:
     min: 0
     max: 0
     currentMin: 2.6008968
-    currentMax: 6.935725
+    currentMax: 8.958645
   damage: 1
+  life: 0
+  speed: 0

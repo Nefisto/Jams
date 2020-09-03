@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e77a28e6d0ec63458f8cbdd3c2b4424, type: 3}
-  m_Name: Mix pack
+  m_Name: Normal pack
   m_EditorClassIdentifier: 
   groups:
   - enemy: {fileID: 6680196462676953014, guid: 65fdc4b01c7a676488cb8604ec2dca07, type: 3}
     amount: 3
-    timeBetweenSpawns: 0.3
-    timeAfterFinish: 1
-  - enemy: {fileID: 9045647185423502923, guid: d37b723daae4d1045a76fc9b2d6aba0b, type: 3}
-    amount: 2
-    timeBetweenSpawns: 0.1
-    timeAfterFinish: 1
+    timeBetweenSpawns: 1
+    timeAfterFinish: 2
+  - enemy: {fileID: 6680196462676953014, guid: 65fdc4b01c7a676488cb8604ec2dca07, type: 3}
+    amount: 3
+    timeBetweenSpawns: 1
+    timeAfterFinish: 2

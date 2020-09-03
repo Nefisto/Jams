@@ -46,7 +46,9 @@ public class LevelManager : MonoBehaviour
             {
                 for (int i = 0; i < group.amount; i++)
                 {
-                    var enemy = Instantiate(group.enemy, Vector3.zero, Quaternion.identity).GetComponent<Enemy>();
+                    var position = waypoints[pathIndex].transform.position;
+
+                    var enemy = Instantiate(group.enemy, position, Quaternion.identity).GetComponent<Enemy>();
                     enemy.StartFollow(waypoints[pathIndex]);
 
                     yield return new WaitForSeconds(group.timeBetweenSpawns);

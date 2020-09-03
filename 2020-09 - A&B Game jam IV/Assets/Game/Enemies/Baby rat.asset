@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce2dd916ddb4b044bb9d6a7ea7a2db2, type: 3}
   m_Name: Baby rat
   m_EditorClassIdentifier: 
-  life:
+  initialLife:
     min: 0
     max: 0
-    currentMin: 4
-    currentMax: 7
-  speed:
+    currentMin: 0
+    currentMax: 0
+  initialSpeed:
     min: 0
     max: 0
-    currentMin: 5.4907823
-    currentMax: 10.403589
+    currentMin: 4.04584
+    currentMax: 11.848531
   damage: 1
+  life: 0
+  speed: 0
