@@ -13,7 +13,7 @@ public partial class Enemy : MonoBehaviour
     private EnemyStatus status;
 
     // Tell to towers that i've died
-    public event Action<Enemy> onDie;
+    public event Action onDie;
 
     private void Start()
     {

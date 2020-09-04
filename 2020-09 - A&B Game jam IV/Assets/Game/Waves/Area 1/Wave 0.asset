@@ -15,7 +15,7 @@ MonoBehaviour:
   packnPaths:
   - pathNumber: 0
     packs:
-    - {fileID: 11400000, guid: 010fb520b1d64c8448ccca282dfd40a3, type: 2}
+    - {fileID: 11400000, guid: e2913881da7fb2e48ac819da726afa05, type: 2}
   - pathNumber: 1
     packs:
-    - {fileID: 11400000, guid: 010fb520b1d64c8448ccca282dfd40a3, type: 2}
+    - {fileID: 11400000, guid: e2913881da7fb2e48ac819da726afa05, type: 2}

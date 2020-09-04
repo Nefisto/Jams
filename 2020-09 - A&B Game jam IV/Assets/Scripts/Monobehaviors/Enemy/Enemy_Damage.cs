@@ -12,9 +12,12 @@ public partial class Enemy
 
     private void Die(bool giveDamage = false)
     {
-        Destroy(gameObject);
+        if (onDie != null)
+            onDie();
 
         if (giveDamage)
             loseLifeEvent.Raise(status.damage);
+
+        Destroy(gameObject);
     }
 }

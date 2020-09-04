@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,18 +9,24 @@ public partial class BasicTower : BaseTower
 
     public float fireRate;
 
+    public bool disabledAtack = false;
+
     public float range = 3f;
 
-    public enum State { Finding, Locked }
+    // public enum State { Finding, Locked }
+    public enum Kind { Single, Multiple}
+    public Kind towerKind;
     public Enemy targetEnemy;
 
     [Header("Debug")]
-    public State currentState = State.Finding;
+    // public State currentState = State.Finding;
     public List<Enemy> enemiesInRange;
+
+    public GameObject bulletPrefab;
 
     public void ResetStatus()
     {
-        currentState = State.Finding;
+        // currentState = State.Finding;
 
         circleCollider2D.radius = range;
     }
@@ -27,6 +34,53 @@ public partial class BasicTower : BaseTower
     private void Start()
     {
         ResetStatus();
+    }
+
+    public void AtackOneTarget()
+    {
+        if (!targetEnemy)
+            return;
+
+        if (disabledAtack)
+            return;
+
+        StartCoroutine(SingleAtackCoroutine());
+
+        IEnumerator SingleAtackCoroutine()
+        {
+            while (enemiesInRange.Count != 0)
+            {
+                var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();
+                bullet.StartFollowTarget(targetEnemy);
+
+                yield return new WaitForSeconds(fireRate);
+            }
+        }
+    }
+
+    public void AtackAllTarget()
+    {
+        if (enemiesInRange.Count == 0)
+            return;
+
+        if (disabledAtack)
+            return;
+            
+        StartCoroutine(MultipleAttackRoutine());
+
+        IEnumerator MultipleAttackRoutine()
+        {
+            while (enemiesInRange.Count != 0)
+            {
+                foreach (var enemy in enemiesInRange)
+                {
+                    var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();
+                    bullet.StartFollowTarget(enemy);
+                }
+
+                yield return new WaitForSeconds(fireRate);
+            }
+        }
     }
 
     private void Update()
@@ -41,8 +95,8 @@ public partial class BasicTower : BaseTower
         // }
     }
 
-    public void ChangeState(State state)
-        => currentState = state;
+    // public void ChangeState(State state)
+    //     => currentState = state;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -51,13 +105,22 @@ public partial class BasicTower : BaseTower
         if (!enemy)
             throw new System.Exception("Tower is colliding with something that isn't enemy");
 
-        if (enemiesInRange.Count == 0)
-        {
-            ChangeState(State.Locked);
-            targetEnemy = enemy;
-        }
-
         enemiesInRange.Add(enemy);
+
+        if (enemiesInRange.Count == 1)
+        {
+            // ChangeState(State.Locked);
+            targetEnemy = enemy;
+
+            if (towerKind == Kind.Single)
+            {
+                AtackOneTarget();
+            }
+            else if (towerKind == Kind.Multiple)
+            {
+                AtackAllTarget();
+            }
+        }
     }
 
     private Enemy FindNereastTarget()
