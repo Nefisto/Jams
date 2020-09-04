@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lose life
   m_EditorClassIdentifier: 
   DeveloperDescription: Lose life
-  value: 0
+  value: 1
   defaultBehavior:
     m_PersistentCalls:
       m_Calls:

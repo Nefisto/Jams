@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
 
     public List<Wave> waves;
 
-    public int lockers = 0;
+    private int lockers = 0;
     private bool VerifyLock()
         => lockers == 0;
 
@@ -23,17 +23,17 @@ public class LevelManager : MonoBehaviour
             yield return null;
             foreach (var wave in waves) // I can have multiple waves
             {
-                    foreach (var packnPath in wave.packnPaths)
-                    {
-                        foreach (var pack in packnPath.packs)
-                            StartCoroutine(SpawnPack(pack, packnPath.pathNumber));
-                    }
+                foreach (var packnPath in wave.packnPaths)
+                {
+                    foreach (var pack in packnPath.packs)
+                        StartCoroutine(SpawnPack(pack, packnPath.pathNumber));
+                }
 
-                    yield return new WaitForSeconds(.02f);
-                    while (!VerifyLock())
-                    {
-                        yield return new WaitForSeconds(.2f);
-                    }
+                yield return new WaitForSeconds(.02f);
+                while (!VerifyLock())
+                {
+                    yield return new WaitForSeconds(.2f);
+                }
             }
         }
 

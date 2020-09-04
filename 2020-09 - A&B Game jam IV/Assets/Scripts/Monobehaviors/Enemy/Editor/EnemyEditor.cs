@@ -15,5 +15,8 @@ public class EnemyEditor : Editor
 
         if (GUILayout.Button("Follow path"))
             _target.StartFollow();
+
+        if (GUILayout.Button("Die"))
+            _target.TakeDamage(10000);
     }
 }

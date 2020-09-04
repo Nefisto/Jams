@@ -14,7 +14,7 @@ TagManager:
   - 
   - 
   - Enemy
-  - 
+  - Tower
   - 
   - 
   - 
@@ -38,6 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Enemies
+    uniqueID: 1524657991
+    locked: 0
+  - name: Bullets
+    uniqueID: 3617465381
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 3853766413
     locked: 0

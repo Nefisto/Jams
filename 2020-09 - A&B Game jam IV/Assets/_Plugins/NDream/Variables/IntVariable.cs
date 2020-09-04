@@ -9,6 +9,6 @@ namespace NDream
             => Value += value;
 
         public void SubtractValue(int value)
-            => Value += value;
+            => Value -= value;
     }
 }

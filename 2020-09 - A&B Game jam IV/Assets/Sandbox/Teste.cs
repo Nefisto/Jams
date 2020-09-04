@@ -10,4 +10,9 @@ public class Teste : MonoBehaviour
     public GameObject enemy;
 
     public IntReference var;
+
+    public void Testando()
+    {
+        Debug.Log("OI");
+    }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Reflection;
+using System;
 
 public partial class Enemy : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public partial class Enemy : MonoBehaviour
     public Waypoints pathToFollow = null;    
 
     private EnemyStatus status;
+
+    // Tell to towers that i've died
+    public event Action<Enemy> onDie;
 
     private void Start()
     {
