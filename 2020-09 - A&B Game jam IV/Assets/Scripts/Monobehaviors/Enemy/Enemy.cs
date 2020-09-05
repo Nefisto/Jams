@@ -5,7 +5,10 @@ using System;
 public partial class Enemy : MonoBehaviour
 {
     public EnemyStatus blueprintStatus;
-    public GameEventInt loseLifeEvent;
+
+    [Header("Events")]
+    public GameEventInt loseLife;
+    public GameEventInt giveMoney;
 
     [Header("Debug")]
     public Waypoints pathToFollow = null;    
@@ -14,7 +17,7 @@ public partial class Enemy : MonoBehaviour
 
     // Tell to towers that i've died
     public event Action onDie;
-
+    
     private void Start()
     {
         if (!blueprintStatus)

@@ -11,6 +11,9 @@ public class EnemyStatus : ScriptableObject
 
     public int damage = 1;
 
+    [MinMaxRange(1, 100)]
+    public IntRange money;
+
     [HideInInspector] public int life;
     [HideInInspector] public float speed;
 }

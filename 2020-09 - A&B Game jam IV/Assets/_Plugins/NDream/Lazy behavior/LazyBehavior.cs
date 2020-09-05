@@ -7,7 +7,7 @@ public abstract partial class LazyBehavior : MonoBehaviour
     [HideInInspector, NonSerialized]
     private Rigidbody _rigidbody;
     public new Rigidbody rigidbody { get => _rigidbody ? _rigidbody : (_rigidbody = GetComponent<Rigidbody>()); }
-    
+
     [HideInInspector, NonSerialized]
     private Rigidbody2D _rigidbody2D;
     public new Rigidbody2D rigidbody2D { get => _rigidbody2D ? _rigidbody2D : (_rigidbody2D = GetComponent<Rigidbody2D>()); }
@@ -32,4 +32,7 @@ public abstract partial class LazyBehavior : MonoBehaviour
     private Image _image;
     public Image image { get => _image ? _image : (_image = GetComponent<Image>()); }
 
+    [HideInInspector, NonSerialized]
+    private Button _button;
+    public Button button { get => _button ? _button : (_button = GetComponent<Button>()); }
 }

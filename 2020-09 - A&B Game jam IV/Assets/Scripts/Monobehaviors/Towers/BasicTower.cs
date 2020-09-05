@@ -1,33 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NDream;
 
-public partial class BasicTower : BaseTower
+public partial class BasicTower : LazyBehavior
 {
-    [Space(3), MinMaxRange(1, 10)]
-    public IntRange damage;
+    [Header("Editor only")]
+    public Color32 wireFrameColor = Color.white;
 
-    public float fireRate;
+    [Space(3), Header("Status")]
+    public int damage = 1;
 
-    public bool disabledAtack = false;
+    public float fireRate = .5f;
 
     public float range = 3f;
 
-    // public enum State { Finding, Locked }
-    public enum Kind { Single, Multiple}
-    public Kind towerKind;
-    public Enemy targetEnemy;
+    public GameObject bulletPrefab;
+    
 
     [Header("Debug")]
-    // public State currentState = State.Finding;
+    public Enemy targetEnemy;
     public List<Enemy> enemiesInRange;
 
-    public GameObject bulletPrefab;
+    public int cost = 50;
+    public IntReference playerMoney;
 
-    public void ResetStatus()
+    private Coroutine atackRoutine;
+
+    private void ResetStatus()
     {
-        // currentState = State.Finding;
-
         circleCollider2D.radius = range;
     }
 
@@ -36,21 +37,38 @@ public partial class BasicTower : BaseTower
         ResetStatus();
     }
 
-    public void AtackOneTarget()
+    public bool CanBuy()
+        => playerMoney.Value >= cost;
+
+    public void TryBuy()
+    {
+        if (!CanBuy())
+            return;
+        
+        playerMoney.Value -= cost;
+    }
+
+    protected bool CanAttack()
     {
         if (!targetEnemy)
+            targetEnemy = FindNereastTarget();
+
+        return targetEnemy && atackRoutine == null;
+    }
+
+    public virtual void Attack()
+    {
+        if (!CanAttack())
             return;
 
-        if (disabledAtack)
-            return;
-
-        StartCoroutine(SingleAtackCoroutine());
+        atackRoutine = StartCoroutine(SingleAtackCoroutine());
 
         IEnumerator SingleAtackCoroutine()
         {
             while (enemiesInRange.Count != 0)
             {
                 var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();
+                bullet.SetDamage(damage);
                 bullet.StartFollowTarget(targetEnemy);
 
                 yield return new WaitForSeconds(fireRate);
@@ -58,45 +76,15 @@ public partial class BasicTower : BaseTower
         }
     }
 
-    public void AtackAllTarget()
+    public void StopAttack()
     {
-        if (enemiesInRange.Count == 0)
-            return;
-
-        if (disabledAtack)
-            return;
-            
-        StartCoroutine(MultipleAttackRoutine());
-
-        IEnumerator MultipleAttackRoutine()
+        if (atackRoutine != null)
         {
-            while (enemiesInRange.Count != 0)
-            {
-                foreach (var enemy in enemiesInRange)
-                {
-                    var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();
-                    bullet.StartFollowTarget(enemy);
-                }
+            StopCoroutine(atackRoutine);
 
-                yield return new WaitForSeconds(fireRate);
-            }
+            atackRoutine = null;
         }
     }
-
-    private void Update()
-    {
-        // if (currentState == State.Finding)
-        // {
-
-        // }
-        // else
-        // {
-
-        // }
-    }
-
-    // public void ChangeState(State state)
-    //     => currentState = state;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -112,14 +100,7 @@ public partial class BasicTower : BaseTower
             // ChangeState(State.Locked);
             targetEnemy = enemy;
 
-            if (towerKind == Kind.Single)
-            {
-                AtackOneTarget();
-            }
-            else if (towerKind == Kind.Multiple)
-            {
-                AtackAllTarget();
-            }
+            Attack();
         }
     }
 
@@ -161,15 +142,6 @@ public partial class BasicTower : BaseTower
         if (enemy == targetEnemy)
             targetEnemy = FindNereastTarget();
     }
-
-    // * Substituido pelo exit
-    // private void RemoveEnemy(Enemy enemy)
-    // {  
-    //     if (!enemiesInRange.Contains(enemy))
-    //         throw new System.Exception("Enemies does not exist in list");
-
-    //     enemiesInRange.Remove(enemy);
-    // }
 
     private void OnDrawGizmos()
     {

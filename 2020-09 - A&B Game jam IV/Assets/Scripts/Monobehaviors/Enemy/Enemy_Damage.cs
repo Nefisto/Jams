@@ -16,7 +16,9 @@ public partial class Enemy
             onDie();
 
         if (giveDamage)
-            loseLifeEvent.Raise(status.damage);
+            loseLife.Raise(status.damage);
+        else
+            giveMoney.Raise(status.money.GetRandom());
 
         Destroy(gameObject);
     }

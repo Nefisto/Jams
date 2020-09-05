@@ -23,5 +23,10 @@ MonoBehaviour:
     currentMin: 1
     currentMax: 3.45581
   damage: 1
+  money:
+    min: 0
+    max: 0
+    currentMin: 8
+    currentMax: 25
   life: 0
   speed: 0

@@ -20,7 +20,6 @@ namespace NDream
         private T value;
 
         [Header("Debug")]
-        [ReadOnly]
         [SerializeField]
         private T runTimeValue;
 

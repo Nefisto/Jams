@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec97780a32b900f4a8b10f5d4d1cc50a, type: 3}
-  m_Name: ChangeSelectedTower
+  m_Script: {fileID: 11500000, guid: 99914f67ffbb84c47be1d3d3c66e4fd2, type: 3}
+  m_Name: Current tower index
   m_EditorClassIdentifier: 
   DeveloperDescription: 
-  value: 0
-  defaultBehavior:
-    m_PersistentCalls:
-      m_Calls: []
+  haveDefaultValue: 0
+  value: -1
+  runTimeValue: -1

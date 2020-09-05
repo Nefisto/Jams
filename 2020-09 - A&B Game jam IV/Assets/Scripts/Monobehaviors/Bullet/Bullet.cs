@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class Bullet : LazyBehavior
 {
-    public float speed;
-
+    [Header("Come from tower")]
+    [ReadOnly] public int damage = 1;
+    public float speed = 2;
     private Coroutine followRoutine = null;
-    private Enemy targetEnemy;
+
+    private Enemy targetEnemy = null;
 
     private void SetEnemy(Enemy enemy)
     {
@@ -24,6 +26,9 @@ public class Bullet : LazyBehavior
         targetEnemy.onDie -= Explode;
     }
 
+    public void SetDamage(int dmg)
+        => damage = dmg;
+
     public void StartFollowTarget(Enemy enemy)
     {
         SetEnemy(enemy);
@@ -39,6 +44,7 @@ public class Bullet : LazyBehavior
 
                 if (dist.sqrMagnitude < .05f)
                 {
+                    enemy.TakeDamage(damage);
                     Explode();
 
                     break;

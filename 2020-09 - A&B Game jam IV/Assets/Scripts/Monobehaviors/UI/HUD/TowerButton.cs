@@ -1,27 +1,60 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.UI;
+using NDream;
 using UnityEngine.EventSystems;
+using System;
 
-public class TowerButton : MonoBehaviour
+public class TowerButton : LazyBehavior
 {
-    public Camera mainCamera;
+    public Color disableColor;
+    public int index;
 
-    public Sprite towerSprite;
+    [Space]
 
-    public int towerIndex;
+    public Image towerSprite;
+    private Color originalTowerSpriteColor;
+    
+    [Header("Proc events")]
+    public GameEventInt changeCurrentTower;
 
-    public void MouseDown()
+    [Space]
+    public IntReference playerMoney;
+
+    private Color originalColor;
+    public int cost;
+
+    private void Start()
     {
-        
+        originalColor = image.color;
+        originalTowerSpriteColor = towerSprite.color;
+
+        cost = GameManager.instance.GetTower(index).cost;
     }
 
-    public void DragMouse(BaseEventData baseEvent)
+    private void Update()
     {
-        PointerEventData pointerEvent = (PointerEventData)baseEvent;
+        VerifyBuyCondition();
+    }
 
-        var actuallyPos = mainCamera.ScreenToWorldPoint(pointerEvent.position);
-        Debug.Log(actuallyPos);
+    private void VerifyBuyCondition()
+    {
+        if (button.interactable && playerMoney.Value < cost)
+            DisableButton();
+        else if (!button.interactable && playerMoney.Value >= cost)
+            EnableButton();
+    }
+
+    private void EnableButton()
+    {
+        button.interactable = true;
+        towerSprite.color = originalTowerSpriteColor;
+    }
+
+    private void DisableButton()
+    {
+        button.interactable = false;
+        towerSprite.color = disableColor;
     }
 }

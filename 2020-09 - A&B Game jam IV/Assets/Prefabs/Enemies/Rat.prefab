@@ -98,7 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blueprintStatus: {fileID: 11400000, guid: f8096bc6e351a84458d5c24eb2e12090, type: 2}
-  loseLifeEvent: {fileID: 11400000, guid: ec62e75586fc7884f9dec711092db465, type: 2}
+  loseLife: {fileID: 11400000, guid: ec62e75586fc7884f9dec711092db465, type: 2}
+  giveMoney: {fileID: 11400000, guid: 29b2e7047770e344ea84d6003e0b559a, type: 2}
   pathToFollow: {fileID: 0}
 --- !u!61 &6680196462676953010
 BoxCollider2D:

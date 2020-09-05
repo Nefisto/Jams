@@ -16,10 +16,11 @@ public class GameManager : SingletonBehaviour<GameManager>
     public GameEventInt selectedTower;
     public GameEvent startStage;
 
-    IEnumerator Start()
-    {
-        yield return new WaitForSeconds(1);
+    public BasicTower GetTower(int index)
+        => towers[index]?.GetComponent<BasicTower>();
 
+    private void Start()
+    {
         startStage.Raise();
     }
 
@@ -34,6 +35,9 @@ public class GameManager : SingletonBehaviour<GameManager>
             spriteRenderer.sprite = spriteTowers[currentIndex];
         }
     }
+
+    public int GetCurrentIndex()
+        =>  currentIndex;
 
     private void Update()
     {
